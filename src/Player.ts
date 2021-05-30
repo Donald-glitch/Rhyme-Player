@@ -7,6 +7,17 @@ export default class Player {
   songs = [];
 
   constructor(songs?: object[], index?: number) {
+    currentSong.subscribe((value) => {
+      let i = 0;
+      songs.forEach((item) => {
+        i += 1;
+        if (value === item) {
+          return;
+        }
+      });
+      this.index = i;
+      this.play();
+    });
     this.songs = songs;
     this.index = index ? index : this.index;
     this.play();

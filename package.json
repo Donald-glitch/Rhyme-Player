@@ -16,6 +16,7 @@
   },
   "main": "electron.js",
   "scripts": {
+    "runner": "node ./scriptRunner",
     "build": "rollup -c && electron-builder",
     "dev": "npm run format && echo 'Started Dev Enviroment' && rollup -c -w",
     "start": "echo 'Electron is Launching' && electron .",
@@ -70,6 +71,7 @@
     "@tsconfig/svelte": "^1.0.0",
     "@types/node": "^15.6.1",
     "autoprefixer": "^10.2.5",
+    "electron": "^13.0.1",
     "electron-builder": "^22.10.5",
     "electron-reload": "^1.5.0",
     "node-sass": "^6.0.0",
@@ -87,13 +89,13 @@
     "svelte-check": "^1.0.0",
     "svelte-preprocess": "^4.0.0",
     "tslib": "^2.0.0",
-    "typescript": "^4.0.0",
-    "electron": "^13.0.1"
+    "typescript": "^4.0.0"
   },
   "dependencies": {
     "electron-is-dev": "^2.0.0",
     "electron-json-storage": "^4.5.0",
     "howler": "^2.2.1",
+    "inquirer": "^8.1.0",
     "music-metadata": "^7.8.5",
     "svelte-spa-router": "^3.1.0"
   }

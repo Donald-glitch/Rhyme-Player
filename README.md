@@ -38,10 +38,7 @@ Matrix: <img src ="https://img.shields.io/matrix/rhymes-player:matrix.org">
 
 - Clone Repo `https://github.com/RhymePlayer/Rhyme-Player.git`
 - `cd Rhyme-Player`
-- Install Dependencies `npm i` or `yarn`
-- Run in Dev Mode `npm run dev` or `yarn dev`
-- Build app `npm run build` or `yarn build`
-  > Note `npm run build` and `yarn build` will only generate an installer for current os you can custimize the `package.json` for custom builds
+- then run `npm run runner` or `yarn runner`
 
 # Contributing
 
