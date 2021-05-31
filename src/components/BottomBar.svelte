@@ -2,8 +2,8 @@
   import { currentSong } from "../store";
 </script>
 
-<main>
-  {#if $currentSong}
+{#if $currentSong}
+  <main>
     <div class="songInfo">
       <img src={$currentSong["imgSrc"]} alt="" />
       <div class="songTitles">
@@ -11,8 +11,8 @@
         <p>{$currentSong["artist"]}</p>
       </div>
     </div>
-  {/if}
-</main>
+  </main>
+{/if}
 
 <style lang="scss">
   .songInfo {

@@ -27,7 +27,15 @@
       if (fs.statSync(path.join(dir, file)).isDirectory()) {
         filelist = walkSync(path.join(dir, file), filelist);
       } else {
-        if (file.endsWith(".mp3") || file.endsWith(".m4a") || file.endsWith(".webm") || file.endsWith(".wav") || file.endsWith(".aac") || file.endsWith(".ogg") || file.endsWith(".opus")) {
+        if (
+          file.endsWith(".mp3") ||
+          file.endsWith(".m4a") ||
+          file.endsWith(".webm") ||
+          file.endsWith(".wav") ||
+          file.endsWith(".aac") ||
+          file.endsWith(".ogg") ||
+          file.endsWith(".opus")
+        ) {
           filelist.push(path.join(dir, file));
         }
       }
@@ -51,7 +59,11 @@
       data["title"] = title ? title : audioFile.split(path.sep).slice(-1)[0];
       data["artist"] = artist ? artist : "Unknown";
       data["file"] = audioFile;
-      data["imgSrc"] = metadata.common.picture ? `data:${metadata.common.picture[0].format};base64,${metadata.common.picture[0].data.toString("base64")}` : null;
+      data["imgSrc"] = metadata.common.picture
+        ? `data:${
+            metadata.common.picture[0].format
+          };base64,${metadata.common.picture[0].data.toString("base64")}`
+        : null;
       songsInfo.push(data);
       songsArray.set(songsInfo);
     }
@@ -76,11 +88,30 @@
 
 <main>
   <div class="search">
-    <svg width="61.737961mm" height="61.301872mm" viewBox="0 0 61.737961 61.301872">
+    <svg
+      width="61.737961mm"
+      height="61.301872mm"
+      viewBox="0 0 61.737961 61.301872"
+    >
       <g id="layer1" transform="translate(-120.44117,-90.049182)">
-        <g id="g839" transform="translate(98.599622,5.4834689)" inkscape:transform-center-x="8.8837363" inkscape:transform-center-y="23.022654">
-          <circle style="fill:none;fill-opacity:0.999428;stroke:#000000;stroke-width:2.265;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" id="path833" cx="39.903915" cy="102.62808" r="16.929869" />
-          <path style="fill:none;stroke:#000000;stroke-width:2.12422;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 52.38632,114.6744 30.442162,30.44216 z" id="path835" />
+        <g
+          id="g839"
+          transform="translate(98.599622,5.4834689)"
+          inkscape:transform-center-x="8.8837363"
+          inkscape:transform-center-y="23.022654"
+        >
+          <circle
+            style="fill:none;fill-opacity:0.999428;stroke:#000000;stroke-width:2.265;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+            id="path833"
+            cx="39.903915"
+            cy="102.62808"
+            r="16.929869"
+          />
+          <path
+            style="fill:none;stroke:#000000;stroke-width:2.12422;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+            d="m 52.38632,114.6744 30.442162,30.44216 z"
+            id="path835"
+          />
         </g>
       </g>
     </svg>
@@ -98,11 +129,25 @@
     <div class="songs">
       {#each songsInfo as song}
         {#if searchVal !== ""}
-          {#if song["title"].toLowerCase().includes(searchVal.toLowerCase()) || song["artist"].toLowerCase().includes(searchVal.toLowerCase())}
-            <SongItem artist={song["artist"]} title={song["title"]} imgSrc={song["imgSrc"]} file={song["file"]} />
+          {#if song["title"]
+            .toLowerCase()
+            .includes(searchVal.toLowerCase()) || song["artist"]
+              .toLowerCase()
+              .includes(searchVal.toLowerCase())}
+            <SongItem
+              artist={song["artist"]}
+              title={song["title"]}
+              imgSrc={song["imgSrc"]}
+              file={song["file"]}
+            />
           {/if}
         {:else}
-          <SongItem artist={song["artist"]} title={song["title"]} imgSrc={song["imgSrc"]} file={song["file"]} />
+          <SongItem
+            artist={song["artist"]}
+            title={song["title"]}
+            imgSrc={song["imgSrc"]}
+            file={song["file"]}
+          />
         {/if}
       {/each}
     </div>

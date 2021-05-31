@@ -5,6 +5,7 @@ import { currentSong } from "./store";
 export default class Player {
   index: number = 0;
   songs: object[];
+  sound: typeof Howl;
 
   constructor(songs?: object[], index?: number) {
     this.songs = songs;
@@ -13,7 +14,9 @@ export default class Player {
   }
 
   play(index?: number) {
-    var sound: typeof Howl;
+    if (this.sound) {
+      this.sound.stop();
+    }
     let self = this;
 
     index = index ? index : this.index;
@@ -21,9 +24,9 @@ export default class Player {
     let data = this.songs[index];
 
     if (data["howl"]) {
-      sound = data["howl"];
+      this.sound = data["howl"];
     } else {
-      sound = data["howl"] = new Howl({
+      this.sound = data["howl"] = new Howl({
         src: data["file"],
         html5: true,
         onplay: function () {
@@ -38,7 +41,7 @@ export default class Player {
         },
       });
     }
-    sound.play();
+    this.sound.play();
 
     this.index = index;
   }

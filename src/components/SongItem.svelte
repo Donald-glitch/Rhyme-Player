@@ -15,6 +15,7 @@
       title,
       imgSrc,
       file,
+      howl: null,
     });
   }}
 >
