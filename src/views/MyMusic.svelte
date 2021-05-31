@@ -2,6 +2,7 @@
   import SongItem from "../components/SongItem.svelte";
   import Player from "../Player";
   import { player, songsArray } from "../store";
+  let searchVal = "";
 
   const storage = require("electron-json-storage");
   const mm = require("music-metadata");
@@ -26,15 +27,7 @@
       if (fs.statSync(path.join(dir, file)).isDirectory()) {
         filelist = walkSync(path.join(dir, file), filelist);
       } else {
-        if (
-          file.endsWith(".mp3") ||
-          file.endsWith(".m4a") ||
-          file.endsWith(".webm") ||
-          file.endsWith(".wav") ||
-          file.endsWith(".aac") ||
-          file.endsWith(".ogg") ||
-          file.endsWith(".opus")
-        ) {
+        if (file.endsWith(".mp3") || file.endsWith(".m4a") || file.endsWith(".webm") || file.endsWith(".wav") || file.endsWith(".aac") || file.endsWith(".ogg") || file.endsWith(".opus")) {
           filelist.push(path.join(dir, file));
         }
       }
@@ -52,14 +45,11 @@
       data["title"] = title ? title : audioFile.split(path.sep).slice(-1)[0];
       data["artist"] = artist ? artist : "Unknown";
       data["file"] = audioFile;
-      data["imgSrc"] = metadata.common.picture
-        ? `data:${
-            metadata.common.picture[0].format
-          };base64,${metadata.common.picture[0].data.toString("base64")}`
-        : null;
+      data["imgSrc"] = metadata.common.picture ? `data:${metadata.common.picture[0].format};base64,${metadata.common.picture[0].data.toString("base64")}` : null;
+
       songsInfo.push(data);
-      songsInfo = songsInfo;
-      songsArray.set(songsInfo);
+      console.log(data);
+      console.log(songsInfo);
     }
   }
 
@@ -68,10 +58,11 @@
       songsInfo = $songsArray;
       return;
     }
+    songsArray.set(songsInfo);
     if (!filePath || filePath == "undefined") return;
     var files = walkSync(filePath);
     await parseFiles(files);
-    player.set(new Player($songsArray));
+    player.set(new Player(songsInfo));
   }
 
   storage.get("settings", (error: string, data: string) => {
@@ -81,6 +72,17 @@
 </script>
 
 <main>
+  <div class="search">
+    <svg width="61.737961mm" height="61.301872mm" viewBox="0 0 61.737961 61.301872">
+      <g id="layer1" transform="translate(-120.44117,-90.049182)">
+        <g id="g839" transform="translate(98.599622,5.4834689)" inkscape:transform-center-x="8.8837363" inkscape:transform-center-y="23.022654">
+          <circle style="fill:none;fill-opacity:0.999428;stroke:#000000;stroke-width:2.265;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" id="path833" cx="39.903915" cy="102.62808" r="16.929869" />
+          <path style="fill:none;stroke:#000000;stroke-width:2.12422;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 52.38632,114.6744 30.442162,30.44216 z" id="path835" />
+        </g>
+      </g>
+    </svg>
+    <input type="text" bind:value={searchVal} placeholder="Search" />
+  </div>
   {#if recentlyPlayed}
     <h1>Recently Played</h1>
     <div class="recently-played">
@@ -92,12 +94,13 @@
   {#if songsInfo}
     <div class="songs">
       {#each songsInfo as song}
-        <SongItem
-          artist={song["artist"]}
-          title={song["title"]}
-          imgSrc={song["imgSrc"]}
-          file={song["file"]}
-        />
+        {#if searchVal !== ""}
+          {#if song["title"].toLowerCase().includes(searchVal.toLowerCase()) || song["artist"].toLowerCase().includes(searchVal.toLowerCase())}
+            <SongItem artist={song["artist"]} title={song["title"]} imgSrc={song["imgSrc"]} file={song["file"]} />
+          {/if}
+        {:else}
+          <SongItem artist={song["artist"]} title={song["title"]} imgSrc={song["imgSrc"]} file={song["file"]} />
+        {/if}
       {/each}
     </div>
   {/if}
@@ -105,6 +108,27 @@
 
 <style lang="scss">
   main {
+    .search {
+      display: flex;
+      align-items: center;
+      border-radius: 30px;
+      border: 1px solid #5c5c5c;
+      padding: 6px 15px;
+      gap: 10px;
+      margin-bottom: 20px;
+      input {
+        width: 100%;
+        height: auto;
+        border: none;
+        font-size: 1em;
+        color: #5c5c5c;
+      }
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: #5c5c5c;
+      }
+    }
     padding: 20px;
     width: 100%;
     height: 100%;

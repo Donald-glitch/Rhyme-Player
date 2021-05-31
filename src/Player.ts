@@ -4,20 +4,10 @@ import { currentSong } from "./store";
 
 export default class Player {
   index: number = 0;
-  songs = [];
+  songs: object[];
 
   constructor(songs?: object[], index?: number) {
-    currentSong.subscribe((value) => {
-      let i = 0;
-      songs.forEach((item) => {
-        i += 1;
-        if (value === item) {
-          return;
-        }
-      });
-      this.index = i;
-      this.play();
-    });
+    console.log(songs);
     this.songs = songs;
     this.index = index ? index : this.index;
     this.play();
@@ -31,11 +21,11 @@ export default class Player {
 
     let data = this.songs[index];
 
-    if (data.howl) {
-      sound = data.howl;
+    if (data["howl"]) {
+      sound = data["howl"];
     } else {
-      sound = data.howl = new Howl({
-        src: [data.file],
+      sound = data["howl"] = new Howl({
+        src: data["file"],
         html5: true,
         onplay: function () {
           console.log("Started");
@@ -55,7 +45,7 @@ export default class Player {
   }
 
   pause() {
-    var sound = this.songs[this.index].howl;
+    var sound: typeof Howl = this.songs[this.index]["howl"];
 
     sound.pause();
   }
