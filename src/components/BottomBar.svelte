@@ -35,6 +35,7 @@
   }
   main {
     height: 105px;
+    box-shadow: 0px -4px 30px 0px #5c5c5cab;
     width: 100%;
     padding: 10px;
     display: flex;

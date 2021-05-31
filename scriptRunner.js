@@ -16,7 +16,7 @@ prompt({
   prompt({
     type: "list",
     name: "packageManager",
-    defalut: "Male",
+    defalut: "Dev",
     message: "Choose your package manager: ",
     choices: ["Yarn", "NPM"],
   }).then((result) => {

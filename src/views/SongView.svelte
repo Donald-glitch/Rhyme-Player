@@ -1,14 +1,23 @@
 <script lang="ts">
   import { songViewInfo } from "../store";
+  function showPlayBtn() {
+    let playBtn = document.getElementById("play-btn");
+    playBtn.style.display = "block";
+  }
+  function hidePlayBtn() {
+    let playBtn = document.getElementById("play-btn");
+    playBtn.style.display = "none";
+  }
 </script>
 
 <main>
-  <div class="song-info">
+  <div class="song-info" on:mouseenter={showPlayBtn} on:mouseleave={hidePlayBtn}>
     <img src={$songViewInfo["imgSrc"]} alt="" />
     <div class="info">
       <h2>{$songViewInfo["title"]}</h2>
       <p>{$songViewInfo["artist"]}</p>
     </div>
+    <div id="play-btn">SS</div>
   </div>
 </main>
 

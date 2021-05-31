@@ -1,6 +1,7 @@
 <script lang="ts">
   let settings = {};
   const storage = require("electron-json-storage");
+  import { songsArray } from "../store";
 
   storage.has("settings", (error: string, hasKey: boolean) => {
     if (error) throw error;
@@ -22,7 +23,7 @@
       .then((result) => {
         const filePath = result.filePaths[0];
         if (filePath) {
-          console.dir(filePath);
+          songsArray.set([]);
           settings["folder"] = filePath;
           storage.set("settings", settings, function (error) {
             if (error) throw error;
@@ -36,9 +37,7 @@
   <h1>General</h1>
   <ul class="general">
     <li>
-      Music Folder <button on:click={showFolderDialog}
-        >{settings["folder"]}</button
-      >
+      Music Folder <button on:click={showFolderDialog}>{settings["folder"]}</button>
     </li>
   </ul>
 </main>

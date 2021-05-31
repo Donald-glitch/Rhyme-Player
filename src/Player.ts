@@ -7,7 +7,6 @@ export default class Player {
   songs: object[];
 
   constructor(songs?: object[], index?: number) {
-    console.log(songs);
     this.songs = songs;
     this.index = index ? index : this.index;
     this.play();

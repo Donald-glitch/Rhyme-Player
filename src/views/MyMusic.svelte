@@ -18,7 +18,7 @@
       });
     }
   });
-  let songsInfo: object[] = [];
+  $: songsInfo = $songsArray;
 
   var walkSync = function (dir: string, filelist?: string[]) {
     let files = fs.readdirSync(dir);
@@ -36,6 +36,12 @@
   };
 
   async function parseFiles(audioFiles: string[]) {
+    if (songsInfo) {
+      if (songsInfo.length > 0) {
+        return;
+      }
+    }
+
     for (const audioFile of audioFiles) {
       // await will ensure the metadata parsing is completed before we move on to the next file
       const metadata = await mm.parseFile(audioFile, { skipCovers: false });
@@ -46,22 +52,19 @@
       data["artist"] = artist ? artist : "Unknown";
       data["file"] = audioFile;
       data["imgSrc"] = metadata.common.picture ? `data:${metadata.common.picture[0].format};base64,${metadata.common.picture[0].data.toString("base64")}` : null;
-
       songsInfo.push(data);
-      console.log(data);
-      console.log(songsInfo);
+      songsArray.set(songsInfo);
     }
   }
 
   async function scanDir(filePath: string) {
-    if ($songsArray) {
-      songsInfo = $songsArray;
-      return;
-    }
-    songsArray.set(songsInfo);
     if (!filePath || filePath == "undefined") return;
     var files = walkSync(filePath);
     await parseFiles(files);
+    if ($player) {
+      $player.songs = songsInfo;
+      return;
+    }
     player.set(new Player(songsInfo));
   }
 

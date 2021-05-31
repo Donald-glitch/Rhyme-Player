@@ -42,19 +42,7 @@
       My Music
     </a>
     <a href="#/explore" class:active={$location === "/explore"}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        version="1.1"
-        id="Capa_1"
-        x="0px"
-        y="0px"
-        width="24px"
-        height="24px"
-        viewBox="0 0 510 510"
-        style="enable-background:new 0 0 510 510;"
-        xml:space="preserve"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 510 510" style="enable-background:new 0 0 510 510;" xml:space="preserve">
         <g>
           <g id="explore">
             <path
@@ -81,16 +69,7 @@
     </a>
   </div>
   <a href="#/settings" class:active={$location === "/settings"}>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-      id="Layer_1"
-      viewBox="0 0 512 512"
-      style="enable-background:new 0 0 512 512;"
-      xml:space="preserve"
-      width="24px"
-      height="24px"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="Layer_1" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="24px" height="24px">
       <g>
         <g>
           <path
@@ -150,7 +129,7 @@
   .active {
     color: white;
     background-color: #ff006b;
-    box-shadow: 0px 4px 40px 10px #00000070;
+    box-shadow: 0px 4px 40px 10px #5c5c5cab;
     svg {
       fill: white;
     }
