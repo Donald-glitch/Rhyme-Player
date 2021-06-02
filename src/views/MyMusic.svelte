@@ -86,7 +86,7 @@
         </g>
       </g>
     </svg>
-    <input type="text" bind:value={searchVal} placeholder="Search Music" />
+    <input type="text" bind:value={searchVal} placeholder="Search Music" spellcheck="false" />
   </div>
   {#if recentlyPlayed}
     <h1>Recently Played</h1>
