@@ -14,17 +14,19 @@ export default class Player {
   }
 
   play(index?: number) {
-    if (this.sound) {
-      this.sound.stop();
-    }
     let self = this;
 
     index = index ? index : this.index;
 
     let data = this.songs[index];
 
+    if (self.sound) {
+      self.sound.pause();
+    }
+
     if (data["howl"]) {
       this.sound = data["howl"];
+      console.log(this.sound);
     } else {
       this.sound = data["howl"] = new Howl({
         src: data["file"],
@@ -41,7 +43,38 @@ export default class Player {
         },
       });
     }
+    let recentlyPlayed = [];
+
+    storage.get("recently-played", (error: string, val: object) => {
+      if (error) throw error;
+      if (val["recentlyPlayed"]) {
+        recentlyPlayed = val["recentlyPlayed"];
+        for (let i = 0; i < recentlyPlayed.length; i++) {
+          const element = recentlyPlayed[i];
+          if (
+            element["title"] + element["artist"] ===
+            data["title"] + data["artist"]
+          ) {
+            return;
+          }
+        }
+      }
+      let newData = data;
+      newData["howl"] = null;
+      recentlyPlayed.push(newData);
+      if (recentlyPlayed.length > 20) {
+        recentlyPlayed = recentlyPlayed.shift();
+      }
+
+      storage.set("recently-played", { recentlyPlayed }, (error: string) => {
+        if (error) throw error;
+      });
+    });
+
     this.sound.play();
+    if (index === 0) {
+      let oldData = this.songs[this.index - 1];
+    }
 
     this.index = index;
   }

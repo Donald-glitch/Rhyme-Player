@@ -1,5 +1,6 @@
 <script lang="ts">
   import SongItem from "../components/SongItem.svelte";
+  import ResumePlay from "../assets/ResumePlay.svelte";
   import Player from "../Player";
   import { player, songsArray } from "../store";
   let searchVal = "";
@@ -12,9 +13,9 @@
   storage.has("recently-played", (error: string, hasKey: boolean) => {
     if (error) throw error;
     if (hasKey) {
-      storage.get("recently-played", (error: string, data: object) => {
+      storage.get("recently-played", (error: string, data: object[]) => {
         if (error) throw error;
-        recentlyPlayed = data["recently-played"];
+        recentlyPlayed = data["recentlyPlayed"];
       });
     }
   });
@@ -27,15 +28,7 @@
       if (fs.statSync(path.join(dir, file)).isDirectory()) {
         filelist = walkSync(path.join(dir, file), filelist);
       } else {
-        if (
-          file.endsWith(".mp3") ||
-          file.endsWith(".m4a") ||
-          file.endsWith(".webm") ||
-          file.endsWith(".wav") ||
-          file.endsWith(".aac") ||
-          file.endsWith(".ogg") ||
-          file.endsWith(".opus")
-        ) {
+        if (file.endsWith(".mp3") || file.endsWith(".m4a") || file.endsWith(".webm") || file.endsWith(".wav") || file.endsWith(".aac") || file.endsWith(".ogg") || file.endsWith(".opus")) {
           filelist.push(path.join(dir, file));
         }
       }
@@ -59,11 +52,7 @@
       data["title"] = title ? title : audioFile.split(path.sep).slice(-1)[0];
       data["artist"] = artist ? artist : "Unknown";
       data["file"] = audioFile;
-      data["imgSrc"] = metadata.common.picture
-        ? `data:${
-            metadata.common.picture[0].format
-          };base64,${metadata.common.picture[0].data.toString("base64")}`
-        : null;
+      data["imgSrc"] = metadata.common.picture ? `data:${metadata.common.picture[0].format};base64,${metadata.common.picture[0].data.toString("base64")}` : null;
       songsInfo.push(data);
       songsArray.set(songsInfo);
     }
@@ -88,40 +77,22 @@
 
 <main>
   <div class="search">
-    <svg
-      width="61.737961mm"
-      height="61.301872mm"
-      viewBox="0 0 61.737961 61.301872"
-    >
-      <g id="layer1" transform="translate(-120.44117,-90.049182)">
-        <g
-          id="g839"
-          transform="translate(98.599622,5.4834689)"
-          inkscape:transform-center-x="8.8837363"
-          inkscape:transform-center-y="23.022654"
-        >
-          <circle
-            style="fill:none;fill-opacity:0.999428;stroke:#000000;stroke-width:2.265;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            id="path833"
-            cx="39.903915"
-            cy="102.62808"
-            r="16.929869"
-          />
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512.005 512.005" style="enable-background:new 0 0 512.005 512.005;" xml:space="preserve">
+      <g>
+        <g>
           <path
-            style="fill:none;stroke:#000000;stroke-width:2.12422;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            d="m 52.38632,114.6744 30.442162,30.44216 z"
-            id="path835"
+            d="M505.749,475.587l-145.6-145.6c28.203-34.837,45.184-79.104,45.184-127.317c0-111.744-90.923-202.667-202.667-202.667    S0,90.925,0,202.669s90.923,202.667,202.667,202.667c48.213,0,92.48-16.981,127.317-45.184l145.6,145.6    c4.16,4.16,9.621,6.251,15.083,6.251s10.923-2.091,15.083-6.251C514.091,497.411,514.091,483.928,505.749,475.587z     M202.667,362.669c-88.235,0-160-71.765-160-160s71.765-160,160-160s160,71.765,160,160S290.901,362.669,202.667,362.669z"
           />
         </g>
       </g>
     </svg>
-    <input type="text" bind:value={searchVal} placeholder="Search" />
+    <input type="text" bind:value={searchVal} placeholder="Search Music" />
   </div>
   {#if recentlyPlayed}
     <h1>Recently Played</h1>
     <div class="recently-played">
       {#each recentlyPlayed as item}
-        SS
+        <SongItem artist={item["artist"]} title={item["title"]} imgSrc={item["imgSrc"]} file={item["file"]} />
       {/each}
     </div>
   {/if}
@@ -129,25 +100,11 @@
     <div class="songs">
       {#each songsInfo as song}
         {#if searchVal !== ""}
-          {#if song["title"]
-            .toLowerCase()
-            .includes(searchVal.toLowerCase()) || song["artist"]
-              .toLowerCase()
-              .includes(searchVal.toLowerCase())}
-            <SongItem
-              artist={song["artist"]}
-              title={song["title"]}
-              imgSrc={song["imgSrc"]}
-              file={song["file"]}
-            />
+          {#if song["title"].toLowerCase().includes(searchVal.toLowerCase()) || song["artist"].toLowerCase().includes(searchVal.toLowerCase())}
+            <SongItem artist={song["artist"]} title={song["title"]} imgSrc={song["imgSrc"]} file={song["file"]} />
           {/if}
         {:else}
-          <SongItem
-            artist={song["artist"]}
-            title={song["title"]}
-            imgSrc={song["imgSrc"]}
-            file={song["file"]}
-          />
+          <SongItem artist={song["artist"]} title={song["title"]} imgSrc={song["imgSrc"]} file={song["file"]} />
         {/if}
       {/each}
     </div>
@@ -159,9 +116,9 @@
     .search {
       display: flex;
       align-items: center;
-      border-radius: 30px;
-      border: 1px solid #5c5c5c;
-      padding: 6px 15px;
+      border-radius: 10px;
+      background-color: #ececec;
+      padding: 6px 10px;
       gap: 10px;
       margin-bottom: 20px;
       input {
@@ -169,15 +126,20 @@
         height: auto;
         border: none;
         font-size: 1em;
+        background-color: #ececec;
         color: #5c5c5c;
+        &::placeholder {
+          color: #5c5c5c;
+        }
       }
       svg {
-        width: 20px;
-        height: 20px;
+        width: 24px;
+        height: 24px;
         fill: #5c5c5c;
       }
     }
     padding: 20px;
+    padding-right: 0;
     width: 100%;
     height: 100%;
 
@@ -188,11 +150,15 @@
 
     .recently-played {
       width: 100%;
-      height: 200px;
       border-radius: 10px;
       margin-top: 15px;
+      padding: 20px;
       background-color: #ececec;
+      display: flex;
+      align-items: center;
+      gap: 20px;
       overflow-x: scroll;
+      margin-bottom: 20px;
     }
 
     .songs {

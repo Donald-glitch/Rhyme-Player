@@ -42,6 +42,7 @@
       >
     </li>
   </ul>
+  Put in mind that this is an alpha release it is not ready to be used
 </main>
 
 <style lang="scss">

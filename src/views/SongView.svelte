@@ -16,8 +16,6 @@
         value["artist"] === $songViewInfo["artist"]
       ) {
         $player.index = $player.songs.indexOf(value);
-        console.log(value);
-        console.log($player.index);
         $player.play();
         return;
       }
@@ -38,21 +36,11 @@
         <p>{$songViewInfo["artist"]}</p>
       </div>
       <div id="play-btn" on:click={playSong}>
-        <svg
-          width="69.801514mm"
-          height="80.599846mm"
-          viewBox="0 0 69.801514 80.599846"
-          version="1.1"
-          id="svg8"
-        >
-          <g id="layer1" transform="translate(-14.96718,-15.350977)">
+        <svg width="74" height="74" viewBox="0 0 74 74">
+          <g>
             <path
-              style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.265"
-              id="path835"
-              d="m 82.503696,55.650902 -66.404016,38.338377 0,-76.676754 z"
-              inkscape:transform-center-x="-12.725526"
-              transform="matrix(1.1498276,0,0,0.99234747,-2.3349122,0.26613341)"
-              inkscape:transform-center-y="-1.699616e-06"
+              d="M25.9993 19.6798L55.9993 37.0003L25.9993 54.3208L25.9993 19.6798Z"
+              fill="white"
             />
           </g>
         </svg>
@@ -66,16 +54,16 @@
     display: none;
     cursor: pointer;
     background-color: #ff006b;
-    max-width: 40px;
-    max-height: 40px;
-    min-width: 40px;
-    min-height: 40px;
+    max-width: 50px;
+    max-height: 50px;
+    min-width: 50px;
+    min-height: 50px;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     svg {
-      width: 16px;
-      height: 20px;
+      width: 40px;
+      height: 40px;
     }
   }
   main {

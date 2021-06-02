@@ -29,6 +29,7 @@
 <style>
   main {
     display: flex;
+    overflow-x: visible;
     flex-direction: column;
     gap: 10px;
     cursor: pointer;

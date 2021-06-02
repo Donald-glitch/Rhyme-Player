@@ -1,7 +1,7 @@
 {
   "name": "rhyme-player",
   "productName": "Rhyme Player",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "The #1 Open source cross-platform muisc player and streamer",
   "homepage": "https://rhyme-player.netlify.app",
   "repository": {
@@ -54,7 +54,9 @@
     "linux": {
       "target": [
         "AppImage",
-        "deb"
+        "deb",
+        "rpm",
+        "snap"
       ],
       "category": "Utility",
       "maintainer": "Abdallah <abdullah_mam1@icloud.com>",
