@@ -51,10 +51,7 @@ export default class Player {
         recentlyPlayed = val["recentlyPlayed"];
         for (let i = 0; i < recentlyPlayed.length; i++) {
           const element = recentlyPlayed[i];
-          if (
-            element["title"] + element["artist"] ===
-            data["title"] + data["artist"]
-          ) {
+          if (element["title"] + element["artist"] === data["title"] + data["artist"]) {
             return;
           }
         }
@@ -63,7 +60,7 @@ export default class Player {
       newData["howl"] = null;
       recentlyPlayed.push(newData);
       if (recentlyPlayed.length > 10) {
-        recentlyPlayed = recentlyPlayed.shift();
+        recentlyPlayed.shift();
       }
 
       storage.set("recently-played", { recentlyPlayed }, (error: string) => {
