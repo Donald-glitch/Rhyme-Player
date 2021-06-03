@@ -1,5 +1,5 @@
 <h1 align="center"> 
-  <img src="https://matrix-client.matrix.org/_matrix/media/r0/thumbnail/matrix.org/WZpvhceoSwbhMWvnUFPhgBeT?width=64&height=64&method=crop"/> 
+  <img src="https://matrix-client.matrix.org/_matrix/media/r0/download/matrix.org/cGIEwZuHhESNiNgitRIKamxL" width="128px" height="128px"/> 
   <br/>
   Rhyme Player
 </h1>
@@ -38,7 +38,7 @@ Matrix: <img src ="https://img.shields.io/matrix/rhymes-player:matrix.org">
 
 - Clone Repo `https://github.com/RhymePlayer/Rhyme-Player.git`
 - `cd Rhyme-Player`
-- then run `npm run runner` or `yarn runner`
+- then run `npm i` or `yarn` `npm run runner` or `yarn runner`
 
 # Contributing
 
