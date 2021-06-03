@@ -159,7 +159,7 @@
 
 <style lang="scss">
   main {
-    overflow-y:overlay;
+    overflow-y: overlay;
     .search {
       display: flex;
       align-items: center;
