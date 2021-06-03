@@ -116,12 +116,12 @@
     .search {
       display: flex;
       align-items: center;
-      border-radius: 10px;
+      border-radius: 7px;
       background-color: #ececec;
       padding: 6px 10px;
       gap: 10px;
       margin-bottom: 20px;
-      transition: 0.3s;
+      transition: 0.2s;
       &:focus-within {
         box-shadow: 0px 4px 7px rgba(92, 92, 92, 0.25);
         input::placeholder {
