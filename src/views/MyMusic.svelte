@@ -28,15 +28,7 @@
       if (fs.statSync(path.join(dir, file)).isDirectory()) {
         filelist = walkSync(path.join(dir, file), filelist);
       } else {
-        if (
-          file.endsWith(".mp3") ||
-          file.endsWith(".m4a") ||
-          file.endsWith(".webm") ||
-          file.endsWith(".wav") ||
-          file.endsWith(".aac") ||
-          file.endsWith(".ogg") ||
-          file.endsWith(".opus")
-        ) {
+        if (file.endsWith(".mp3") || file.endsWith(".m4a") || file.endsWith(".webm") || file.endsWith(".wav") || file.endsWith(".aac") || file.endsWith(".ogg") || file.endsWith(".opus")) {
           filelist.push(path.join(dir, file));
         }
       }
@@ -60,11 +52,7 @@
       data["title"] = title ? title : audioFile.split(path.sep).slice(-1)[0];
       data["artist"] = artist ? artist : "Unknown";
       data["file"] = audioFile;
-      data["imgSrc"] = metadata.common.picture
-        ? `data:${
-            metadata.common.picture[0].format
-          };base64,${metadata.common.picture[0].data.toString("base64")}`
-        : null;
+      data["imgSrc"] = metadata.common.picture ? `data:${metadata.common.picture[0].format};base64,${metadata.common.picture[0].data.toString("base64")}` : null;
       songsInfo.push(data);
       songsArray.set(songsInfo);
     }
@@ -89,17 +77,7 @@
 
 <main>
   <div class="search">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-      version="1.1"
-      id="Capa_1"
-      x="0px"
-      y="0px"
-      viewBox="0 0 512.005 512.005"
-      style="enable-background:new 0 0 512.005 512.005;"
-      xml:space="preserve"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512.005 512.005" style="enable-background:new 0 0 512.005 512.005;" xml:space="preserve">
       <g>
         <g>
           <path
@@ -108,23 +86,13 @@
         </g>
       </g>
     </svg>
-    <input
-      type="text"
-      bind:value={searchVal}
-      placeholder="Search Music"
-      spellcheck="false"
-    />
+    <input type="text" bind:value={searchVal} placeholder="Search Music" spellcheck="false" />
   </div>
   {#if recentlyPlayed}
     <h1>Recently Played</h1>
     <div class="recently-played">
       {#each recentlyPlayed as item}
-        <SongItem
-          artist={item["artist"]}
-          title={item["title"]}
-          imgSrc={item["imgSrc"]}
-          file={item["file"]}
-        />
+        <SongItem artist={item["artist"]} title={item["title"]} imgSrc={item["imgSrc"]} file={item["file"]} />
       {/each}
     </div>
   {/if}
@@ -132,25 +100,11 @@
     <div class="songs">
       {#each songsInfo as song}
         {#if searchVal !== ""}
-          {#if song["title"]
-            .toLowerCase()
-            .includes(searchVal.toLowerCase()) || song["artist"]
-              .toLowerCase()
-              .includes(searchVal.toLowerCase())}
-            <SongItem
-              artist={song["artist"]}
-              title={song["title"]}
-              imgSrc={song["imgSrc"]}
-              file={song["file"]}
-            />
+          {#if song["title"].toLowerCase().includes(searchVal.toLowerCase()) || song["artist"].toLowerCase().includes(searchVal.toLowerCase())}
+            <SongItem artist={song["artist"]} title={song["title"]} imgSrc={song["imgSrc"]} file={song["file"]} />
           {/if}
         {:else}
-          <SongItem
-            artist={song["artist"]}
-            title={song["title"]}
-            imgSrc={song["imgSrc"]}
-            file={song["file"]}
-          />
+          <SongItem artist={song["artist"]} title={song["title"]} imgSrc={song["imgSrc"]} file={song["file"]} />
         {/if}
       {/each}
     </div>
@@ -167,6 +121,13 @@
       padding: 6px 10px;
       gap: 10px;
       margin-bottom: 20px;
+      transition: 0.3s;
+      &:focus-within {
+        box-shadow: 0px 4px 7px rgba(92, 92, 92, 0.25);
+        input::placeholder {
+          color: transparent;
+        }
+      }
       input {
         width: 100%;
         height: auto;
@@ -185,7 +146,6 @@
       }
     }
     padding: 20px;
-    padding-right: 0;
     width: 100%;
     height: 100%;
 

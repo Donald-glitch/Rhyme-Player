@@ -17,7 +17,7 @@
   "main": "electron.js",
   "scripts": {
     "runner": "node ./scriptRunner",
-    "build": "rollup -c && electron-builder -wl",
+    "build": "rollup -c && electron-builder",
     "dev": "npm run format && echo 'Started Dev Enviroment' && rollup -c -w",
     "start": "echo 'Electron is Launching' && electron .",
     "validate": "svelte-check",
