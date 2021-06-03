@@ -4,7 +4,10 @@
   function playSong() {
     for (let i = 0; i < $player.songs.length; i++) {
       const value = $player.songs[i];
-      if (value["title"] === $songViewInfo["title"] && value["artist"] === $songViewInfo["artist"]) {
+      if (
+        value["title"] === $songViewInfo["title"] &&
+        value["artist"] === $songViewInfo["artist"]
+      ) {
         $player.index = $player.songs.indexOf(value);
         $player.play();
         return;
@@ -19,7 +22,10 @@
       <div id="play-btn" on:click={playSong}>
         <svg width="74" height="74" viewBox="0 0 74 74">
           <g>
-            <path d="M25.9993 19.6798L55.9993 37.0003L25.9993 54.3208L25.9993 19.6798Z" fill="white" />
+            <path
+              d="M25.9993 19.6798L55.9993 37.0003L25.9993 54.3208L25.9993 19.6798Z"
+              fill="white"
+            />
           </g>
         </svg>
       </div>

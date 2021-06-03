@@ -62,7 +62,7 @@ export default class Player {
       let newData = data;
       newData["howl"] = null;
       recentlyPlayed.push(newData);
-      if (recentlyPlayed.length > 20) {
+      if (recentlyPlayed.length > 10) {
         recentlyPlayed = recentlyPlayed.shift();
       }
 
