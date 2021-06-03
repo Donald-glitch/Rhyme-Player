@@ -51,7 +51,10 @@ export default class Player {
         recentlyPlayed = val["recentlyPlayed"];
         for (let i = 0; i < recentlyPlayed.length; i++) {
           const element = recentlyPlayed[i];
-          if (element["title"] + element["artist"] === data["title"] + data["artist"]) {
+          if (
+            element["title"] + element["artist"] ===
+            data["title"] + data["artist"]
+          ) {
             return;
           }
         }
