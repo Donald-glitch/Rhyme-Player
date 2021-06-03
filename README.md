@@ -38,7 +38,7 @@ Matrix: <img src ="https://img.shields.io/matrix/rhymes-player:matrix.org">
 
 - Clone Repo `https://github.com/RhymePlayer/Rhyme-Player.git`
 - `cd Rhyme-Player`
-- then run `npm run runner` or `yarn runner`
+- then run `npm i` or `yarn` `npm run runner` or `yarn runner`
 
 # Contributing
 
