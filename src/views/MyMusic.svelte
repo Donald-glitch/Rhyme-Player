@@ -186,8 +186,10 @@
         }
       }
       svg {
-        width: 24px;
-        height: 24px;
+        min-width: 20px;
+        min-height: 20px;
+        width: 20px;
+        height: 20px;
         fill: #5c5c5c;
       }
     }
