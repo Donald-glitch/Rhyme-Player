@@ -42,8 +42,8 @@ Matrix: <img src ="https://img.shields.io/matrix/rhymes-player:matrix.org">
 
 # Contributing
 
-When contributing to `Rhyme Player`, please first discuss the change you wish to make via a discussion or an issue
-When creating a pull request please use Emojis for your commits
+When contributing to `Rhyme Player`, please first discuss the change you wish to make via a discussion or an issue.
+When creating a pull request please use Emojis for your commits.
 See also [gitmoji](https://gitmoji.carloscuesta.me/).
 
 | Commit type                | Emoji                                                     |
@@ -95,6 +95,6 @@ See also [gitmoji](https://gitmoji.carloscuesta.me/).
 
 # Pull Requests
 
-Please put in mind that even if you have the write access to merge a PR wait for reviews from me or other contributors
-if the feature that the PR implements is still not finished please convert the PR to a draft to let reviewers know that it is incomplete
-before you make your PR ready for reviews you must make sure that it passed all the checks
+Please put in mind that even if you have the write access to merge a PR wait for reviews from me or other contributors.
+If the feature that the PR implements is still not finished please convert the PR to a draft to let reviewers know that it is incomplete
+before you make your PR ready for reviews. You must make sure that it passed all the checks!
