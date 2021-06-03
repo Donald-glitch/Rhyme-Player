@@ -1,5 +1,5 @@
 <h1 align="center"> 
-  <img src="https://matrix-client.matrix.org/_matrix/media/r0/thumbnail/matrix.org/WZpvhceoSwbhMWvnUFPhgBeT?width=64&height=64&method=crop"/> 
+  <img src="https://matrix-client.matrix.org/_matrix/media/r0/download/matrix.org/cGIEwZuHhESNiNgitRIKamxL/> 
   <br/>
   Rhyme Player
 </h1>
